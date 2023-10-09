@@ -1,11 +1,13 @@
 
 package co.com.pizzeria.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,8 +25,8 @@ public class CarritoCompra {
 	@Column(name = "id_carrito")
 	private Integer idCarritoCompras;
 	
-   @OneToMany(mappedBy="carritoCompras")
-	private List<Producto> listaProductos;
+   @OneToMany
+   private List<Producto> listaProductos;
 
 	@Column(name = "detalle")
 	private String detalle;

@@ -1,8 +1,11 @@
 package co.com.pizzeria.controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,27 +30,32 @@ public class ProductoController {
 	@Autowired
 	private ProductosServices services;
 	@GetMapping()
-	public ResponseEntity<?> bucarTodasLosProductos() {
-		return null;
+	public ResponseEntity<?> bucarTodasLosProductos() throws Exception {
+		List<Producto> listaProductos = services.findAll();
+		return ResponseEntity.status(HttpStatus.OK).body(listaProductos);
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<?> bucarProductosPorId(@PathVariable Integer id) {
-		return null;
+		Producto producto = services.buscarProductoPorId(id);
+		return ResponseEntity.status(HttpStatus.OK).body(producto);
 	}
 
 	@PostMapping()
 	public ResponseEntity<?> nuevoResgistroDeProductos(@RequestBody Producto nuevoProducto) {
-		return null;
+		Producto producto = services.guardarNuevoResgistroProducto(nuevoProducto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(producto);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> actualizarLaCategoriaProductos(@PathVariable Integer id,@RequestBody Producto productoActualziar) {
-		return null;
+		Producto producto = services.actualizarUnregistroDeProductos(id,productoActualziar);
+		return ResponseEntity.status(HttpStatus.OK).body(producto);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> borrarLaCategoriaProductos(@PathVariable Integer id) {
-		return null;
+		services.eliminarResgistroProducto(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se elimino correctamente el resgistro de ID : "+id);
 	}
 	
 }

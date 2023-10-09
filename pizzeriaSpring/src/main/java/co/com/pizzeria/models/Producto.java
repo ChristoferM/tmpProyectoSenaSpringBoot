@@ -27,9 +27,9 @@ public class Producto {
 	@Column(name = "nombre_producto")
 	private String nombreProducto;
 	
-	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name="id_carrito", nullable=false)
-	 private CarritoCompra carritoCompras;
+	 /*@ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name="id_carrito")
+	 private CarritoCompra carritoCompras;*/
 
 	// constructor
 	public Producto() {
